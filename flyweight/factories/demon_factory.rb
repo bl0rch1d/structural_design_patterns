@@ -6,13 +6,30 @@ class DemonFactory
   end
   
   def call(name, model_object, textures, animations)
-    existed_type = @demon_types.find { |type| type.name == name }
+    existed_type = find_type(name)
 
-    return Demon.new(existed_type) if existed_type
+    return create_demon(existed_type) if existed_type
 
-    new_demon_type = DemonType.new(name, model_object, textures, animations)
-    @demon_types << new_demon_type
+    new_demon_type = create_demon_type(name, model_object, textures, animations)
 
-    Demon.new(new_demon_type)
+    create_demon(new_demon_type)
+  end
+
+  private
+
+  def find_type(name)
+    @demon_types.find { |type| type.name == name }
+  end
+
+  def create_demon(type)
+    Demon.new(type)
+  end
+
+  def create_demon_type(name, model_object, textures, animations)
+    type = DemonType.new(name, model_object, textures, animations)
+
+    @demon_types << type
+
+    type
   end
 end
