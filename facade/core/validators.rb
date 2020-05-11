@@ -51,7 +51,7 @@ class InventoryValidator < Validator
   end
 
   def quantity_valid?
-    @storage.products.select { |product| product.sku == @product_sku  }.first.inventory >= @quantity
+    @storage.products.find { |product| product.sku == @product_sku }.inventory >= @quantity
   end
 end
 

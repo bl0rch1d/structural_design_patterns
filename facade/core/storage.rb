@@ -1,3 +1,7 @@
+# Prototypes
+class Storage; end
+# =============
+
 class Storage
   attr_reader :products
 

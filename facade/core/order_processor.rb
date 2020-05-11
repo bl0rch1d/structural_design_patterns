@@ -28,7 +28,7 @@ class InventoryTracker < OrderProcessor
   private
 
   def get_product
-    @product = @storage.products.select { |product| product.sku == @product_sku  }.first
+    @product = @storage.products.find { |product| product.sku == @product_sku }
   end
 
   def track_inventory
